@@ -151,6 +151,11 @@ class CookieConsent extends Component {
       this.setState({ visible: false });
     }
   }
+  
+  setVisibility = () => {
+    this.setState({
+      visible:false
+    })
 
   render() {
     // If the bar shouldn't be visible don't render anything.
@@ -259,7 +264,7 @@ class CookieConsent extends Component {
     return (
       <div className={`cookieConsent ${containerClasses}`} style={myStyle}>
         <div style={myContentStyle} className={contentClasses}>
-          {this.props.children}
+          {React.cloneElement(this.props.children, { visible: this.state.visible, setVisibility: this.setVisibility })}
         </div>
         {buttonsToRender.map(button => {
           return button;
